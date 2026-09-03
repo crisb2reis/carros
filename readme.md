@@ -54,7 +54,7 @@ Abra o terminal (PowerShell ou CMD), navegue até a pasta `backend` e execute:
 cd backend
 
 # 2. Crie o ambiente virtual
-python -m venv venv
+python3 -m venv venv
 
 # 3. Ative o ambiente virtual
 .\venv\Scripts\activate
