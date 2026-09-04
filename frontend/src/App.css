@@ -1,9 +1,67 @@
-.landing-page { padding: 20px; max-width: 800px; margin: auto; }
-.hero { text-align: center; margin-bottom: 40px; }
-.crud-section { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-.crud-form { display: flex; gap: 10px; margin-bottom: 20px; }
-.crud-form input { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-.crud-form button { padding: 8px 16px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
-.crud-table { width: 100%; border-collapse: collapse; }
-.crud-table th, .crud-table td { padding: 12px; border: 1px solid #eee; text-align: left; }
-.crud-table th { background: #f8f9fa; }
+/* Reset e Base */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.6; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.bg-light { background-color: #f8f9fa; }
+.bg-white { background-color: #ffffff; }
+
+/* Navbar */
+.navbar { display: flex; justify-content: space-between; align-items: center; background: #1a252f; color: white; padding: 15px 40px; position: sticky; top: 0; z-index: 1000; }
+.nav-logo { font-size: 1.5rem; font-weight: bold; letter-spacing: 1px; }
+.nav-links { list-style: none; display: flex; gap: 20px; }
+.nav-links a { color: #fff; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+.nav-links a:hover { color: #3498db; }
+
+/* Hero Section */
+.hero-section { background: linear-gradient(rgba(26, 37, 47, 0.8), rgba(26, 37, 47, 0.8)), url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover; color: white; padding: 100px 20px; text-align: center; }
+.hero-content h1 { font-size: 3rem; margin-bottom: 20px; }
+.hero-content p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 30px; opacity: 0.9; }
+.cta-button { display: inline-block; background: #3498db; color: white; padding: 12px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; transition: background 0.3s; }
+.cta-button:hover { background: #2980b9; }
+
+/* Features / Sobre */
+.about-section { padding: 60px 0; text-align: center; background: #fff; }
+.about-section h2 { margin-bottom: 40px; color: #1a252f; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.feature-card { padding: 30px; background: #f8f9fa; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.3s; }
+.feature-card:hover { transform: translateY(-5px); }
+.feature-card h3 { color: #3498db; margin-bottom: 15px; }
+
+/* Seções de CRUD */
+.crud-container { padding: 60px 0; }
+.section-header { text-align: center; margin-bottom: 40px; }
+.section-header h2 { color: #1a252f; margin-bottom: 10px; }
+.section-header p { color: #666; }
+
+/* Estilos dos Componentes CRUD */
+.crud-section { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+.crud-section h2 { display: none; } /* Oculta o h2 antigo dos componentes pois agora o Home cuida do titulo */
+.crud-form { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 30px; }
+.crud-form input { flex: 1; min-width: 200px; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; }
+.crud-form button { padding: 12px 24px; background: #2ecc71; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: background 0.3s; white-space: nowrap; }
+.crud-form button:hover { background: #27ae60; }
+
+.crud-table { width: 100%; border-collapse: collapse; border-radius: 8px; overflow: hidden; }
+.crud-table th, .crud-table td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
+.crud-table th { background: #f8f9fa; color: #1a252f; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; }
+.crud-table tr:hover { background-color: #fdfdfd; }
+.crud-table td button { background: #e74c3c; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; transition: background 0.3s; }
+.crud-table td button:hover { background: #c0392b; }
+
+/* Footer */
+.footer-section { background: #1a252f; color: #bbb; text-align: center; padding: 30px 20px; margin-top: 40px; }
+
+/* Carrossel de Veículos */
+.carousel-container { margin-top: 40px; padding-top: 30px; border-top: 1px solid #eee; }
+.carousel-title { color: #1a252f; margin-bottom: 20px; font-size: 1.5rem; text-align: center; }
+.carousel-track { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px; scroll-snap-type: x mandatory; }
+.carousel-track::-webkit-scrollbar { height: 8px; }
+.carousel-track::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 4px; }
+.carousel-card { flex: 0 0 300px; scroll-snap-align: start; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid #eaeaea; }
+.carousel-image { height: 200px; background: #f4f4f4; display: flex; align-items: center; justify-content: center; }
+.carousel-image img { width: 100%; height: 100%; object-fit: cover; }
+.no-image { color: #aaa; font-style: italic; }
+.carousel-info { padding: 20px; text-align: center; }
+.carousel-info h4 { margin-bottom: 10px; color: #1a252f; font-size: 1.2rem; }
+.car-year { color: #666; margin-bottom: 5px; }
+.car-price { font-weight: bold; color: #2ecc71; font-size: 1.1rem; }
