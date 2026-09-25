@@ -4,8 +4,9 @@ import '../App.css';
 
 // ENDEREÇO DO BACKEND
 // Esta é a URL (porta de entrada) do nosso servidor backend. 
-// O frontend usa este endereço para saber para onde enviar os pedidos (buscar, salvar ou deletar dados).
-const API_URL = 'http://localhost:8081';
+// O frontend usa este endereço para saber para onde enviar os pedidos.
+// Agora o endereço está sendo puxado do arquivo .env de forma segura!
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8081';
 
 function Compradores() {
   const [compradores, setCompradores] = useState([]);

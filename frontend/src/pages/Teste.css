@@ -1,0 +1,89 @@
+.container {
+  padding: 20px;
+}
+
+.item-fruit {
+  color: magenta;
+}
+
+.item-vegetable {
+  color: darkgreen;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.count-button,
+.status-button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.count-button {
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+.count-button:hover {
+  background-color: #cbd5e1;
+}
+
+.status-button.btn-inactive {
+  background-color: #22c55e;
+  color: white;
+}
+
+.status-button.btn-inactive:hover {
+  background-color: #16a34a;
+}
+
+.status-button.btn-active {
+  background-color: #ef4444;
+  color: white;
+}
+
+.status-button.btn-active:hover {
+  background-color: #dc2626;
+}
+
+.total-message {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.status-box {
+  margin-top: 15px;
+  padding: 12px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  margin-left: 6px;
+  font-weight: bold;
+}
+
+.badge-active {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.badge-inactive {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+

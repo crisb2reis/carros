@@ -2,6 +2,7 @@ import React from 'react';
 import Carros from './Carros';
 import Vendedores from './Vendedores';
 import Compradores from './Compradores';
+import Teste from './Teste';
 import '../App.css';
 
 function Home() {
@@ -81,7 +82,12 @@ function Home() {
         </div>
       </section>
 
-      {/* SEÇÃO 7: Footer */}
+      {/* SEÇÃO 7: Testes */}
+      <section id="testes" className="crud-container bg-white">
+        <Teste />
+      </section>
+
+      {/* SEÇÃO 8: Footer */}
       <footer className="footer-section">
         <div className="container">
           <p>&copy; {new Date().getFullYear()} Vanguarda Auto - Plataforma Educacional de Gestão</p>

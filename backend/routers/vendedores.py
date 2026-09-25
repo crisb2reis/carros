@@ -1,5 +1,8 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
+from typing import Optional
+import math
 import models, schemas
 from database import get_db
 
@@ -30,12 +33,50 @@ def criar_vendedor(vendedor: schemas.VendedorCreate, db: Session = Depends(get_d
     # Retorna o vendedor recem-criado para quem fez a chamada.
     return db_vendedor
 
-@router.get("/", response_model=list[schemas.Vendedor])
-def listar_vendedores(db: Session = Depends(get_db)):
-    # RECEBIMENTO: Recebida requisicao GET para listar todos.
-    # BANCO DE DADOS: Roda o comando equivalente a SELECT * FROM vendedores.
-    # RESPOSTA: Entrega os dados formatados em JSON automaticamente.
-    return db.query(models.Vendedor).all()
+@router.get("/", response_model=schemas.VendedorPaginado)
+def listar_vendedores(
+    busca: Optional[str] = Query(None, description="Termo para busca em nome, email ou telefone"),
+    pagina: int = Query(1, ge=1, description="Numero da pagina a ser exibida (minimo 1)"),
+    limite: int = Query(10, ge=1, description="Quantidade de registros por pagina"),
+    db: Session = Depends(get_db)
+):
+    # PASSO 1: CONSTRUÇÃO DA CONSULTA BASE (SQLAlchemy)
+    # Inicializamos a query sem executar no banco ainda.
+    query = db.query(models.Vendedor)
+    
+    # PASSO 2: FILTRAGEM NO BANCO DE DADOS (Server-Side Filtering)
+    # Se o frontend enviou um termo de busca, adicionamos as condicoes WHERE (LIKE/ILIKE) na query.
+    if busca and busca.strip():
+        termo = f"%{busca.strip()}%"
+        query = query.filter(
+            or_(
+                models.Vendedor.nome.ilike(termo),
+                models.Vendedor.email.ilike(termo),
+                models.Vendedor.telefone.ilike(termo)
+            )
+        )
+    
+    # PASSO 3: CONTAGEM TOTAL DE REGISTROS FILTRADOS (SQL COUNT)
+    # Contamos quantos registros atendem ao filtro antes de aplicar o corte de pagina.
+    total = query.count()
+    
+    # PASSO 4: CALCULO DE OFFSET E LIMIT (Server-Side Pagination)
+    # Exemplo: Para pagina=2 e limite=10 -> offset = (2 - 1) * 10 = 10 (pula os 10 primeiros)
+    offset = (pagina - 1) * limite
+    vendedores = query.offset(offset).limit(limite).all()
+    
+    # PASSO 5: CALCULO DO TOTAL DE PAGINAS
+    total_paginas = math.ceil(total / limite) if total > 0 else 1
+    
+    # RESPOSTA (Backend -> Frontend)
+    # Retorna a lista da pagina atual junto com os metadados de paginacao.
+    return {
+        "itens": vendedores,
+        "total": total,
+        "pagina": pagina,
+        "limite": limite,
+        "total_paginas": total_paginas
+    }
 
 @router.delete("/{vendedor_id}")
 def deletar_vendedor(vendedor_id: int, db: Session = Depends(get_db)):

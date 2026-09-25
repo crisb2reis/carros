@@ -48,6 +48,17 @@ class Vendedor(VendedorBase):
     class Config:
         orm_mode = True
 
+class VendedorPaginado(BaseModel):
+    # Schema utilizado para responder ao frontend com a lista filtrada/paginada e metadados.
+    itens: list[Vendedor]
+    total: int
+    pagina: int
+    limite: int
+    total_paginas: int
+
+    class Config:
+        orm_mode = True
+
 # --- SCHEMAS DE COMPRADORES ---
 
 class CompradorBase(BaseModel):
